@@ -1,0 +1,67 @@
+[
+  {
+    "url": "https://neckboard.com",
+    "image": "https://nimaniazi.com/static/neckboard.png",
+    "name": "Neckboard - Virtual Fretboard"
+  },
+  {
+    "url": "https://nimaniazi.com/nardin",
+    "image": "https://nimaniazi.com/static/nardin/thumbnail.jpg",
+    "name": "Nardin"
+  },
+  {
+    "url": "https://github.com/nimanns/delay",
+    "image": "https://nimaniazi.com/static/dualdelay.png",
+    "name": "Dual Delay VST3 Plugin"
+  },
+  {
+    "url": "https://github.com/nimanns/piclure",
+    "image": "https://nimaniazi.com/static/piclure.png",
+    "name": "Piclure - A Photoblog"
+  },
+  {
+    "url": "https://github.com/nimanns/medds",
+    "image": "https://nimaniazi.com/static/medds.png",
+    "name": "medds - Medication Reminder Android App"
+  },
+  {
+    "url": "https://nimaniazi.com/loopcrafthub",
+    "image": "https://nimaniazi.com/static/loopcrafthub/thumbnail.jpg",
+    "name": "LoopCraftHub - AI Music Generator"
+  },
+  {
+    "url": "https://nimaniazi.com/citizenjane",
+    "image": "https://nimaniazi.com/static/citizenjane/thumbnail.jpg",
+    "name": "Citizen Jane"
+  },
+  {
+    "url": "https://nimaniazi.com/nila",
+    "image": "https://nimaniazi.com/static/nila/thumbnail.jpg",
+    "name": "Nila - Smart Alarm Sleeping Mask"
+  },
+  {
+    "url": "https://nimaniazi.com/veggiesandmeat",
+    "image": "https://nimaniazi.com/static/veggiesandmeat/thumbnail.jpg",
+    "name": "Veggies & Meat - Arcade Game"
+  },
+  {
+    "url": "https://nimaniazi.com/binaryphonestand",
+    "image": "https://nimaniazi.com/static/binaryphonestand/thumbnail.jpg",
+    "name": "Binary Phone Stand"
+  },
+  {
+    "url": "https://nimanns.github.io/juvenile-demo/",
+    "image": "https://nimaniazi.com/static/juvenile.png",
+    "name": "juvenile - p5.js audio visualizer"
+  },
+  {
+    "url": "https://nimaniazi.com/itp/energy/7/",
+    "image": "https://nimaniazi.com/static/kineticwah.png",
+    "name": "The Kinetic Wah Pedal"
+  },
+  {
+    "url": "https://nimaniazi.com/itp/light/9",
+    "image": "https://nimaniazi.com/static/circle.png",
+    "name": "Circle - An interactive task light"
+  }
+]

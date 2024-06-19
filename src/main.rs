@@ -1,4 +1,4 @@
-use actix_web::{web, App, HttpServer, HttpResponse, Responder};
+use actix_web::{web, App, HttpServer, HttpResponse};
 use reqwest;
 use scraper::{Html, Selector};
 use serde::Serialize;
@@ -60,31 +60,15 @@ async fn fetch_projects() -> Vec<Project> {
     projects
 }
 
-
-async fn index() -> impl Responder {
+async fn index() -> HttpResponse {
     let projects = fetch_projects().await;
-    let html = format!(
-        "<html><body><h1>Projects</h1>{}</body></html>",
-        projects
-            .iter()
-            .map(|p| format!(
-                "<div><h2>{}</h2><p><a href=\"{}\"><img src=\"{}\"></a></p></div>",
-                p.name.clone().unwrap_or("No Name".to_string()),
-                p.url.clone().unwrap_or("#".to_string()),
-                p.image.clone().unwrap_or("".to_string())
-            ))
-            .collect::<String>()
-    );
     HttpResponse::Ok()
-        .content_type("text/html")
-        .body(html)
+        .content_type("application/json")
+        .json(projects)
 }
-
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    
-    
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
