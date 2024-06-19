@@ -2,6 +2,7 @@ use actix_web::{web, App, HttpServer, HttpResponse};
 use reqwest;
 use scraper::{Html, Selector};
 use serde::Serialize;
+use std::env;
 
 #[derive(Debug, Serialize)]
 struct Project {
@@ -69,11 +70,13 @@ async fn index() -> HttpResponse {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
+    let HOST = env::var("HOST").expect("Host not set");
+    let PORT = env::var("PORT").expect("Port not set");
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(format!("{}:{}", HOST, PORT))?
     .run()
     .await
 }
