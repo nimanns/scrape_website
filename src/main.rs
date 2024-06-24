@@ -22,6 +22,7 @@ struct EmailRequest {
     recipient_email: Option<String>,
     subject: Option<String>,  // This remains optional
     body: Option<String>,
+    g_recaptcha_response: Option<String>,
 }
 
 async fn fetch_projects() -> Vec<Project> {
@@ -82,6 +83,22 @@ async fn index() -> HttpResponse {
 }
 
 async fn send_email(email_req: web::Json<EmailRequest>) -> Result<HttpResponse, actix_web::Error> {
+    // check recaptcha
+    let recaptcha_secret = env::var("RECAPTCHA_SECRET").expect("RECAPTCHA_SECRET not set");
+    let recaptcha_response = email_req.g_recaptcha_response.as_ref()
+        .ok_or_else(|| ErrorBadRequest("g-recaptcha-response is required"))?;
+    let recaptcha_url = format!("https://www.google.com/recaptcha/api/siteverify?secret={}&response={}", recaptcha_secret, recaptcha_response);
+    let recaptcha_response: serde_json::Value = reqwest::get(&recaptcha_url)
+        .await
+        .map_err(|e| ErrorBadRequest(format!("Failed to verify recaptcha: {}", e)))?
+        .json()
+        .await
+        .map_err(|e| ErrorBadRequest(format!("Failed to verify recaptcha: {}", e)))?;
+
+    if !recaptcha_response["success"].as_bool().unwrap_or(false) {
+        return Err(ErrorBadRequest("Recaptcha verification failed"));
+    }
+
     // check if required fields are provided
     let sender_name = email_req.sender_name.as_ref()
         .ok_or_else(|| ErrorBadRequest("sender_name is required"))?;
