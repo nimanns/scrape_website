@@ -82,7 +82,7 @@ async fn index() -> HttpResponse {
 }
 
 async fn send_email(email_req: web::Json<EmailRequest>) -> Result<HttpResponse, actix_web::Error> {
-    // Check if required fields are provided
+    // check if required fields are provided
     let sender_name = email_req.sender_name.as_ref()
         .ok_or_else(|| ErrorBadRequest("sender_name is required"))?;
     let sender_email = email_req.sender_email.as_ref()
@@ -91,10 +91,10 @@ async fn send_email(email_req: web::Json<EmailRequest>) -> Result<HttpResponse, 
     let body = email_req.body.as_ref()
         .ok_or_else(|| ErrorBadRequest("body is required"))?;
 
-    // Subject is optional, use a default if not provided
-    let subject = email_req.subject.as_deref().unwrap_or("No Subject");
+    // subject is optional, use a default if not provided
+    let subject = format!("{} - From: {} <{}>",email_req.subject.as_deref().unwrap_or("No Subject"), sender_name, sender_email);
 
-    // Append sender's email to the top of the body
+    // append sender's email to the top of the body
     let full_body = format!("From: {} <{}>\n\n{}", sender_name, sender_email, body);
 
     let email = Message::builder()
